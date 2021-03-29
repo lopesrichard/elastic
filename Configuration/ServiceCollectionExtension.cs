@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Elastic.Data;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 
@@ -9,7 +10,9 @@ namespace Elastic.Configuration
     {
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
-            return services.AddSerialization();
+            return services
+                .AddTransient<ClientProvider>()
+                .AddSerialization();
         }
 
         public static IServiceCollection AddSerialization(this IServiceCollection services)
